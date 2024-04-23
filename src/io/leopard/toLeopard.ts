@@ -2372,6 +2372,14 @@ export default function toLeopard(
           break;
         }
 
+        case OpCode.javascript_javascript: {
+          satisfiesInputShape = InputShape.Stack;
+          const javascript = inputToJS(block.inputs.JAVASCRIPT, InputShape.Stack);
+          blockSource = block.inputs.JAVASCRIPT.value as string;
+
+          break;
+        }
+
         default: {
           satisfiesInputShape = InputShape.Any;
 

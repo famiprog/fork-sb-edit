@@ -314,8 +314,10 @@ export type WeDo2Block =
   | BlockBase<OpCode.wedo2_getTiltAngle, { TILT_DIRECTION: BlockInput.WeDo2TiltDirection }>
   // Deprecated:
   | BlockBase<OpCode.wedo2_playNoteFor, { NOTE: BlockInput.Number; Duration: BlockInput.Number }>;
+  
+export type JavascriptBlock = BlockBase<OpCode.javascript_javascript, { JAVASCRIPT: BlockInput.String }>
 
-export type ExtensionBlock = MusicBlock | PenBlock | VideoSensingBlock | WeDo2Block;
+export type ExtensionBlock = MusicBlock | PenBlock | VideoSensingBlock | WeDo2Block | JavascriptBlock;
 
 export type KnownBlock =
   | MotionBlock
@@ -887,6 +889,9 @@ const KnownBlockInputMap = {
   },
   [OpCode.videoSensing_setVideoTransparency]: {
     TRANSPARENCY: { type: "number", initial: 50 }
+  },
+  [OpCode.javascript_javascript]: { 
+    JAVASCRIPT: {type: "string", initial: ""}
   }
 } as const satisfies {
   [key in KnownBlock["opcode"]]: {

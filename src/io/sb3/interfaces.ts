@@ -516,7 +516,8 @@ export const inputPrimitiveOrShadowMap = {
   [OpCode.data_showlist]: {},
   [OpCode.data_hidelist]: {},
   [OpCode.argument_reporter_boolean]: {},
-  [OpCode.argument_reporter_string_number]: {}
+  [OpCode.argument_reporter_string_number]: {},
+  [OpCode.javascript_javascript]: {}
 } as const satisfies {
   // Custom procedure blocks should be serialized separately from how normal
   // blocks are, since most of their data is stored on a "mutation" field not

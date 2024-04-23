@@ -240,5 +240,7 @@ export enum OpCode {
   wedo2_menu_MOTOR_DIRECTION = "wedo2_menu_MOTOR_DIRECTION",
   wedo2_menu_TILT_DIRECTION = "wedo2_menu_TILT_DIRECTION",
   wedo2_menu_TILT_DIRECTION_ANY = "wedo2_menu_TILT_DIRECTION_ANY",
-  wedo2_menu_OP = "wedo2_menu_OP"
+  wedo2_menu_OP = "wedo2_menu_OP",
+  
+  javascript_javascript = "javascript_javascript"
 }
