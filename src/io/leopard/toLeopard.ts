@@ -182,6 +182,7 @@ export interface ToLeopardOptions {
   getAssetURL: (info: { type: "costume" | "sound"; target: string; name: string; md5: string; ext: string }) => string;
   indexURL: string;
   autoplay: boolean;
+  includeGreenFlag: boolean;
 }
 export default function toLeopard(
   project: Project,
@@ -208,7 +209,8 @@ export default function toLeopard(
       }
     },
     indexURL: "./index.js",
-    autoplay: true
+    autoplay: true, 
+    includeGreenFlag: true
   };
   const options = { ...defaultOptions, ...inOptions };
 
@@ -2442,18 +2444,22 @@ export default function toLeopard(
   let files: { [fileName: string]: string } = {
     "index.html": `
       <!DOCTYPE html>
-      <html>
+      <html style="width:100%; height:100%; display:flex; flex-direction:column;">
         <head>
           <link rel="stylesheet" href="${toLeopardCSS({ from: "index" })}" />
         </head>
-        <body>
-          <button id="greenFlag">Green Flag</button>
-          <div id="project"></div>
+        <body style="margin:0px; display:flex; flex-direction:column; flex:1 1 0;">
+          ${options.includeGreenFlag ? '<button id="greenFlag">Green Flag</button>' : ""}
+          <div id="project" style="flex:1 1 0;"></div>
 
           <script type="module">
             import project from ${JSON.stringify(options.indexURL)};
 
             project.attach("#project");
+
+            // By default Leopard dinamically sets a fixed width and height for the project div
+            // But because we use the generated app inside an iframe in the scratch app, we need the generated app to occupy the entire space of the iframe 
+            let projectElement = document.querySelector(\"#project\"); projectElement.style.width = null; projectElement.style.height = null;
 
             document
               .querySelector("#greenFlag")
