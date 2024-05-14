@@ -2461,11 +2461,13 @@ export default function toLeopard(
             // But because we use the generated app inside an iframe in the scratch app, we need the generated app to occupy the entire space of the iframe 
             let projectElement = document.querySelector(\"#project\"); projectElement.style.width = null; projectElement.style.height = null;
 
-            document
-              .querySelector("#greenFlag")
-              .addEventListener("click", () => {
-                project.greenFlag();
-              });
+            ${options.includeGreenFlag ? ` 
+              document
+                .querySelector("#greenFlag")
+                .addEventListener("click", () => {
+                  project.greenFlag();
+                });` : ""
+            }
 
             ${options.autoplay ? "// Autoplay\nproject.greenFlag();" : ""}
           </script>
